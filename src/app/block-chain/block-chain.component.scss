@@ -1,0 +1,14 @@
+@import '../../color.scss';
+div.container{
+    border-bottom: 1px solid $block-chain-bottom-color;
+    div.heading{
+        font-family: $default-font-family;
+        font-weight: 400;
+        font-size: 30px;
+    }
+    div.blockChain{
+        margin-top: 10px;
+        margin-bottom: 10px;
+        display: flex;
+    }
+}

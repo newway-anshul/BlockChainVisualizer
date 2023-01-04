@@ -1,0 +1,29 @@
+@use "sass:map";
+@import '../../../color.scss';
+div.container{
+    $minimalBoxWidth : map.get($single-block-border-minimla-box,'w');
+    $minimalBoxHeight : map.get($single-block-border-minimla-box,'h');    
+    width: $minimalBoxWidth+35px;
+    height: $minimalBoxHeight;
+    display: flex;    
+    align-items: center;
+    div.minimalBlock {
+        width: $minimalBoxWidth;
+        height: $minimalBoxHeight;
+        background-color: $cube-color; 
+        color: white; 
+        display: flex;
+        align-items: center;
+        justify-content: center;  
+        flex-direction: column;   
+        border-radius: 5px; 
+        font-family: $default-font-family;
+        letter-spacing: 0.5px;
+    } 
+    div.iconContiner{
+        display: inline-block;
+        width: 25px;
+        margin-left: 5px;
+        margin-right: 5px;
+    }     
+}

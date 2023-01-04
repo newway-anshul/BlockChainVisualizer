@@ -1,0 +1,52 @@
+@import '../../color.scss';
+div.container{
+    div.heading{
+      font-family: $default-font-family;
+      text-align: center;
+    }
+    div.validatorsSvg{
+        svg {
+            path:not(.validatorNode,.location){
+                fill: $map-country-color;
+            }            
+            path[stroke-linejoin="miter"]{
+                stroke-width: 5;
+            }
+        }
+    }
+    div.colorInfo{
+        justify-content: center;
+        column-gap: 15px;
+        &>div{
+            column-gap: 5px;
+        }
+        div.validatorNode{
+            div.circleIcon{
+                background: red;
+                height: 25px;
+                width: 25px;
+                border-radius: 50%;
+            }
+        }
+        div.tempLocation{
+            div.locationIcon{
+                svg{
+                    width: 25px;
+                    height: 25px;
+                }
+            }
+        }
+        div.connectingLine{
+            svg{
+                width: 25px;
+                rect{
+                    height: 45px;
+                    width: 280px;
+                }
+            }
+        }
+        div.msg{
+            font-family: $default-font-family;            
+        }
+    }
+}
