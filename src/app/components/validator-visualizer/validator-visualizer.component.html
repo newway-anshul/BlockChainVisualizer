@@ -2851,8 +2851,8 @@
           marker-end=""
           d="M454.6666366789088,256.20001726349176L1232.9999390840555,137.86668863230247"
           id="svg_303"
-          class="connectingLine lin1"
-          stroke="#5b9bd2"
+          class="connectingLine line1"
+          [attr.stroke]="lineColor"
         />
         <path
           _ngcontent-wga-c20=""
@@ -2871,8 +2871,8 @@
           marker-end=""
           d="M457.9999698797874,256.20001726349176L1419.6665983332557,361.20001309116685"
           id="svg_311"
-          class="connectingLine lin2"
-          stroke="#5b9bd2"
+          class="connectingLine line2"
+          [attr.stroke]="lineColor"
         />
         <path
           _ngcontent-wga-c20=""
@@ -2891,8 +2891,8 @@
           marker-end=""
           d="M456.3333032793481,256.20001726349176L1726.3332528140845,664.5333343711169"
           id="svg_313"
-          class="connectingLine lin3"
-          stroke="#5b9bd2"
+          class="connectingLine line3"
+          [attr.stroke]="lineColor"
         />
         <path
           _ngcontent-wga-c20=""
@@ -2911,8 +2911,8 @@
           marker-end=""
           d="M1726.3332528140845,664.5333343711169L1416.3332651323772,359.53334649072747"
           id="svg_315"
-          class="connectingLine lin4"
-          stroke="#5b9bd2"
+          class="connectingLine line4"
+          [attr.stroke]="lineColor"
         />
         <path
           _ngcontent-wga-c20=""
@@ -2931,8 +2931,8 @@
           marker-end=""
           d="M1416.3332651323772,359.53334649072747L1229.666605883177,137.86668863230247"
           id="svg_317"
-          class="connectingLine lin5"
-          stroke="#5b9bd2"
+          class="connectingLine line5"
+          [attr.stroke]="lineColor"
         />
         <path
           _ngcontent-wga-c20=""
@@ -2951,8 +2951,8 @@
           marker-end=""
           d="M1121.333276745883,520.2000067968037 L1230.852922734044,140.20002298939832 "
           id="svg_314"
-          class="connectingLine lin6"
-          stroke="#5b9bd2"
+          class="connectingLine line6"
+          [attr.stroke]="lineColor"
         />
         <path
           _ngcontent-wga-c20=""
@@ -2971,8 +2971,8 @@
           marker-end=""
           d="M682.999960939091,563.5333383844961L1121.3332768546234,520.2000067730746"
           id="svg_319"
-          class="connectingLine lin7"
-          stroke="#5b9bd2"
+          class="connectingLine line7"
+          [attr.stroke]="lineColor"
         />
         <path
           _ngcontent-wga-c20=""
@@ -2991,8 +2991,8 @@
           marker-end=""
           d="M452.9999700784694,256.8666839036675L682.999960939091,565.2000049849355"
           id="svg_322"
-          class="connectingLine lin8"
-          stroke="#5b9bd2"
+          class="connectingLine line8"
+          [attr.stroke]="lineColor"
         />
         <path
           _ngcontent-wga-c20=""
@@ -3011,8 +3011,8 @@
           marker-end=""
           d="M1119.6666102541842,521.866673373514L1722.9999196132057,665.2000010112927"
           id="svg_325"
-          class="connectingLine lin9"
-          stroke="#5b9bd2"
+          class="connectingLine line9"
+          [attr.stroke]="lineColor"
         />
         <path
           _ngcontent-wga-c20=""
@@ -3031,8 +3031,8 @@
           marker-end=""
           d="M681.3332943386517,563.5333383844961L1721.3332530127661,663.5333344108533"
           id="svg_327"
-          class="connectingLine lin10"
-          stroke="#5b9bd2"
+          class="connectingLine line10"
+          [attr.stroke]="lineColor"
         />
         <path
           _ngcontent-wga-c20=""
@@ -3051,8 +3051,8 @@
           marker-end=""
           d="M681.3332943386517,563.5333383844961L1231.3332724836164,138.53335527247816"
           id="svg_329"
-          class="connectingLine lin11"
-          stroke="#5b9bd2"
+          class="connectingLine line11"
+          [attr.stroke]="lineColor"
         />
         <path
           _ngcontent-wga-c20=""
@@ -3071,8 +3071,8 @@
           marker-end=""
           d="M681.3332943386517,561.866671784057L1416.3332651323772,361.8666797313425"
           id="svg_331"
-          class="connectingLine lin12"
-          stroke="#5b9bd2"
+          class="connectingLine line12"
+          [attr.stroke]="lineColor"
         />
         <path
           _ngcontent-wga-c20=""
@@ -3091,8 +3091,8 @@
           marker-end=""
           d="M452.9999700784694,256.8666839036675L1121.3332768546234,521.866673373514"
           id="svg_334"
-          class="connectingLine lin13"
-          stroke="#5b9bd2"
+          class="connectingLine line13"
+          [attr.stroke]="lineColor"
         />
         <path
           _ngcontent-wga-c20=""
@@ -3111,8 +3111,8 @@
           marker-end=""
           d="M1121.3332768546234,520.2000067730746L1419.6665983332557,361.8666797313425"
           id="svg_337"
-          class="connectingLine lin14"
-          stroke="#5b9bd2"
+          class="connectingLine line14"
+          [attr.stroke]="lineColor"
         />
         <g _ngcontent-wga-c20="" class="locationIcon" id="svg_310">
           <path
@@ -3147,74 +3147,29 @@
           marker-end=""
           d="M1551.599988079071,277.9999940395355L1231.599988079071,139.99999403953552"
           id="wire"
-          class="locationToNode"
-          stroke="#5b9bd2"
+          class="connectingLine locationToNode"
+          [attr.stroke]="l2N"
         />
         <circle
-          cx="459.0909118652344"
-          cy="251.81817626953125"
+          *ngFor="let node of nodes; let i = index"
+          [attr.cx]="node.cx"
+          [attr.cy]="node.cy"
           [attr.r]="nodeRadius"
           [attr.stroke]="nodeOuterStrokeColor"
           stroke-width="1"
           [attr.fill]="nodeColor"
-          id="svg_312"
-          class=""
+          [attr.id]="'node' + i"
+          class="node"
         />
         <circle
-          cx="1720.9090270996094"
-          cy="662.7272644042969"
-          [attr.r]="nodeRadius"
-          [attr.stroke]="nodeOuterStrokeColor"
-          stroke-width="1"
-          [attr.fill]="nodeColor"
-          class=""
-          id="svg_316"
-        />
-        <circle
-          cx="1424.5454406738281"
-          cy="360.90909576416016"
-          [attr.r]="nodeRadius"
-          [attr.stroke]="nodeOuterStrokeColor"
-          stroke-width="1"
-          [attr.fill]="nodeColor"
-          class=""
-          id="svg_318"
-        />
-        <circle
-          cx="1124.5454406738281"
-          cy="520.9091033935547"
-          [attr.r]="nodeRadius"
-          [attr.stroke]="nodeOuterStrokeColor"
-          stroke-width="1"
-          [attr.fill]="nodeColor"
-          class=""
-          id="svg_320"
-        />
-        <circle
-          cx="1228.1818237304688"
-          cy="140.9091033935547"
-          [attr.r]="nodeRadius"
-          [attr.stroke]="nodeOuterStrokeColor"
-          stroke-width="1"
-          [attr.fill]="nodeColor"
-          class=""
-          id="svg_321"
-        />
-        <circle
-          cx="690.0000305175781"
-          cy="560.9091033935547"
-          [attr.r]="nodeRadius"
-          [attr.stroke]="nodeOuterStrokeColor"
-          stroke-width="1"
-          [attr.fill]="nodeColor"
-          class=""
-          id="svg_323"
-        />
-        <circle cx="" cy="" r="15" fill="red">
-          <animateMotion dur="1.6s" repeatCount="indefinite">
-            <mpath xlink:href="#wire"></mpath>
-          </animateMotion>
-        </circle>
+          [ngClass]="{ show: showTransaction, hide: !showTransaction }"
+          [attr.r]="trasactionCircleRadius"
+          stroke="black"
+          stroke-width="3"
+          fill="pink"
+          class="node"
+          id="tNode"
+        ></circle>
       </g>
     </svg>
   </div>
@@ -3250,10 +3205,16 @@
           viewBox="0 0 290.658 290.658"
           xml:space="preserve"
         >
-          <rect y="139.474" [attr.fill]="lineColor" />
+          <rect y="139.474" [attr.fill]="l2N" />
         </svg>
       </div>
       <div class="msg">{{ connectingLine }}</div>
     </div>
+  </div>
+  <div class="buttons">
+    <div class="sendTransaction" (click)="sendTransaction()">
+      Send Transaction
+    </div>
+    <div class="broadCastTransaction" (click)="broadCast()">broad cast</div>
   </div>
 </div>

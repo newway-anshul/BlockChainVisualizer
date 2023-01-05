@@ -1,4 +1,4 @@
-@import '../../color.scss';
+@import '../../../color.scss';
 div.container{
     div.heading{
       font-family: $default-font-family;
@@ -11,6 +11,10 @@ div.container{
             }            
             path[stroke-linejoin="miter"]{
                 stroke-width: 5;
+                stroke-dasharray: 10;
+            }
+            circle.hide{
+                display: none;
             }
         }
     }

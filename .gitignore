@@ -104,3 +104,6 @@ dist
 .tern-port
 
 .angular/*
+src/app/components/*/*.css
+src/app/components/*/*/*.css
+.*css
