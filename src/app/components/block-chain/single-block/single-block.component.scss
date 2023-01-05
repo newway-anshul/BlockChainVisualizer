@@ -1,5 +1,5 @@
 @use "sass:map";
-@import '../../../color.scss';
+@import '../../../../color.scss';
 div.container{
     $minimalBoxWidth : map.get($single-block-border-minimla-box,'w');
     $minimalBoxHeight : map.get($single-block-border-minimla-box,'h');    

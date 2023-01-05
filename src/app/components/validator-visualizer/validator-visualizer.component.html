@@ -2849,7 +2849,7 @@
           marker-start=""
           marker-mid=""
           marker-end=""
-          d="M454.6666366789088,256.20001726349176L1232.9999390840555,137.86668863230247"
+          d="M1232.9999390840555,137.86668863230247L454.6666366789088,256.20001726349176"
           id="svg_303"
           class="connectingLine line1"
           [attr.stroke]="lineColor"
@@ -2909,7 +2909,7 @@
           marker-start=""
           marker-mid=""
           marker-end=""
-          d="M1726.3332528140845,664.5333343711169L1416.3332651323772,359.53334649072747"
+          d="M1416.3332651323772,359.53334649072747L1726.3332528140845,664.5333343711169"
           id="svg_315"
           class="connectingLine line4"
           [attr.stroke]="lineColor"
@@ -2929,7 +2929,7 @@
           marker-start=""
           marker-mid=""
           marker-end=""
-          d="M1416.3332651323772,359.53334649072747L1229.666605883177,137.86668863230247"
+          d="M1229.666605883177,137.86668863230247L1416.3332651323772,359.53334649072747"
           id="svg_317"
           class="connectingLine line5"
           [attr.stroke]="lineColor"
@@ -2949,7 +2949,7 @@
           marker-start=""
           marker-mid=""
           marker-end=""
-          d="M1121.333276745883,520.2000067968037 L1230.852922734044,140.20002298939832 "
+          d="M1230.852922734044,140.20002298939832 L1121.333276745883,520.2000067968037"
           id="svg_314"
           class="connectingLine line6"
           [attr.stroke]="lineColor"
@@ -3049,7 +3049,7 @@
           marker-start=""
           marker-mid=""
           marker-end=""
-          d="M681.3332943386517,563.5333383844961L1231.3332724836164,138.53335527247816"
+          d="M1231.3332724836164,138.53335527247816L681.3332943386517,563.5333383844961"
           id="svg_329"
           class="connectingLine line11"
           [attr.stroke]="lineColor"
@@ -3151,14 +3151,14 @@
           [attr.stroke]="l2N"
         />
         <circle
-          *ngFor="let node of nodes; let i = index"
+          *ngFor="let node of nodes"
           [attr.cx]="node.cx"
           [attr.cy]="node.cy"
           [attr.r]="nodeRadius"
           [attr.stroke]="nodeOuterStrokeColor"
           stroke-width="1"
           [attr.fill]="nodeColor"
-          [attr.id]="'node' + i"
+          [attr.id]="'node' + node.id"
           class="node"
         />
         <circle
@@ -3170,6 +3170,18 @@
           class="node"
           id="tNode"
         ></circle>
+        <g class="broadCastGroup">
+          <circle
+            [ngClass]="{ show: broadCastTx, hide: !broadCastTx }"
+            *ngFor="let node of broadCastElePath; let i = index"
+            [attr.r]="trasactionCircleRadius"
+            stroke="black"
+            stroke-width="3"
+            fill="pink"
+            class="node bnode"
+            [attr.id]="'bNode' + i"
+          />
+        </g>
       </g>
     </svg>
   </div>

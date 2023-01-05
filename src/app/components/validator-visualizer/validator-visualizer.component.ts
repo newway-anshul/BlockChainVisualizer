@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { gsap } from 'gsap';
 import { MotionPathPlugin } from 'gsap/src/all';
+import { skip, skipUntil, Subject, take } from 'rxjs';
 @Component({
   selector: 'sb-validator-visualizer',
   templateUrl: './validator-visualizer.component.html',
@@ -53,21 +54,50 @@ export class ValidatorVisualizerComponent implements OnInit {
   locationIconBaseColor = '#e3e2e1';
   //animation related
   showTransaction = false;
+  broadCastTx = false;
   sendTransactionDuration = 2;
   trasactionCircleRadius = 15;
+  broadCastElePath = [
+    '.connectingLine.line1',
+    '.connectingLine.line6',
+    '.connectingLine.line11',
+    '.connectingLine.line5',
+    '.connectingLine.line4',
+  ];
+  //observables
+  $broadCastCompleted = new Subject();
   constructor() {
     gsap.registerPlugin(MotionPathPlugin);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.$broadCastCompleted.pipe(skip(4)).subscribe(() => {
+      console.log('done');
+    });
+  }
   sendTransaction(): void {
     this.showTransaction = true;
     gsap.to('#tNode', {
       duration: this.sendTransactionDuration,
       motionPath: '#wire',
       ease: 'none.none',
-      onComplete: () => {},
+      onComplete: () => {
+        this.broadCast();
+      },
     });
   }
-  broadCast() {}
+  broadCast() {
+    this.broadCastTx = true;
+    this.broadCastElePath.forEach((item: string, index) => {
+      gsap.to(`#bNode${index}`, {
+        duration: this.sendTransactionDuration,
+        motionPath: item,
+        ease: 'none.none',
+        delay: item.includes('4') ? this.sendTransactionDuration : 0,
+        onComplete: () => {
+          this.$broadCastCompleted.next('done');
+        },
+      });
+    });
+  }
 }
