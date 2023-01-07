@@ -1,3 +1,47 @@
 <div class="container">
   <div class="heading headingVerticleSpace">{{ heading }}</div>
+  <div class="formContainer">
+    <div class="f-heading">
+      <div class="logo">
+        <img src="../../../assets/ethereum-eth-logo (1).svg" />
+      </div>
+      <div class="network">{{ network }}</div>
+      <div class="accountIcon"></div>
+    </div>
+    <form class="sendTxForm" [formGroup]="sendTxForm">
+      <div class="control">
+        <label for="From"
+          >from<span class="info">{{ knowMore }}</span></label
+        >
+        <div class="input from">
+          <input type="text" formControlName="from" [attr.disabled]="!!1" />
+        </div>
+      </div>
+      <div class="control">
+        <label for="To"
+          >to<span class="info">{{ knowMore }}</span></label
+        >
+        <div class="input to">
+          <input type="text" formControlName="to" />
+        </div>
+      </div>
+      <div class="control">
+        <label for="Amnt"
+          >amnt<span class="info">{{ knowMore }}</span></label
+        >
+        <div class="input amnt">
+          <input type="text" formControlName="amnt" />
+        </div>
+      </div>
+      <div class="control">
+        <label for="Gas Fee"
+          >gas fee<span class="info">{{ knowMore }}</span></label
+        >
+        <div class="input gasFee">
+          <input type="text" formControlName="gasFee" />
+        </div>
+      </div>
+      <div class="submitBtn" (click)="sendTx()">Submit</div>
+    </form>
+  </div>
 </div>

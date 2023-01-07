@@ -1,0 +1,9 @@
+@import '../../../color.scss';
+footer{
+    div.container{
+        text-align: center;
+        border-top: 1px solid gray;
+        min-height: 50px;
+        font-family: $default-font-family;
+    }
+}

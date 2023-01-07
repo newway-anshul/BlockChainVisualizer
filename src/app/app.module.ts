@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BlockChainComponent } from './components/block-chain/block-chain.component';
@@ -9,6 +9,7 @@ import { HeaderComponentComponent } from './components/header-component/header-c
 import { ValidatorVisualizerComponent } from './components/validator-visualizer/validator-visualizer.component';
 import { StepsVisulizerComponent } from './components/steps-visulizer/steps-visulizer.component';
 import { SendTrasactionComponent } from './components/send-trasaction/send-trasaction.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -19,8 +20,9 @@ import { SendTrasactionComponent } from './components/send-trasaction/send-trasa
     ValidatorVisualizerComponent,
     StepsVisulizerComponent,
     SendTrasactionComponent,
+    FooterComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

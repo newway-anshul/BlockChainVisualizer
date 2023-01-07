@@ -4,4 +4,82 @@ div.container{
       font-family: $default-font-family;
       text-align: center;
     }
+    div.formContainer{
+      margin-left: 8%;
+      margin-right: 8%;
+      border: 2px solid rgba(128, 128, 128, 0.2705882353);
+      border-radius: 10px;
+      overflow: hidden;
+      div.f-heading{
+        font-family: $default-font-family;
+        display: flex;
+        position: relative;
+        background-color: $map-country-color;
+        color: white;
+        height: 50px;
+        align-items: center;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        justify-content: center;
+        div.logo{
+          width: 50px;
+          height: inherit;
+          position: absolute;
+          display: flex;
+          align-items: center;
+          padding-left: 5%;
+          left: 0;
+          img{
+            width: calc(100% - 10px);
+            height: calc(100% - 10px);
+          }
+        }
+        div.network{
+          text-align: center;
+          border: 2px solid #80808063;
+          border-radius: 10px;
+          padding: 2%;
+          padding-inline: 5%;
+          color: #000000b5;
+        }
+      }
+      form.sendTxForm{
+        font-family: $default-font-family; 
+        padding: 5%;       
+        div.control{
+          label{
+            font-size: 15px;
+            span.info{
+              font-size: 12px;
+              color: $cube-color;
+              text-decoration: underline;
+              margin-left: 5px;
+              cursor: pointer;
+            }
+          }
+          div.input{
+            input{
+              min-height: 35px;
+              border-radius: 5px;
+              border: 1px solid gray;
+              width: 100%;
+              text-indent: 3%;
+              padding: 0;
+              margin-bottom: 10px;
+              margin-top: 5px;
+            }
+          }
+        }
+        div.submitBtn{
+          text-align: center;
+          background-color: $cube-color;
+          color: white;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          border-radius: 5px;
+          margin-top: 4%;
+          cursor: pointer;
+        }
+      }
+    }
 }
