@@ -22,7 +22,15 @@
           >to<span class="info">{{ knowMore }}</span></label
         >
         <div class="input to">
-          <input type="text" formControlName="to" />
+          <select formControlName="to">
+            <option
+              *ngFor="let toAddresse of toAddresses; let i = index"
+              [ngValue]="toAddresse"
+              [selected]="i == 0"
+            >
+              {{ toAddresse }}
+            </option>
+          </select>
         </div>
       </div>
       <div class="control">
