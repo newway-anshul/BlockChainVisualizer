@@ -2,14 +2,13 @@ div.container{
     display: flex;
     div.transactionBox{
         flex: 1;
-        border: 1px solid black;
+        border-right: 1px solid black;
     }
     div.steps{
        flex: 1;
-       border: 1px solid black;
+       border-right: 1px solid black;
     }
     div.validator{
-      flex: 2;
-      border: 1px solid black;
+      flex: 1.5;
     }
 }

@@ -1,6 +1,7 @@
 @import '../../../color.scss';
 div.container{
     border-bottom: 1px solid $block-chain-bottom-color;
+    padding-left: 2%;
     div.heading{
         font-family: $default-font-family;
         font-weight: 400;

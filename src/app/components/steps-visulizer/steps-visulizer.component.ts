@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StepsVisulizerComponent implements OnInit {
   heading: string = 'Steps Visualizer';
+  timeLines = [
+    'Chris Serrano posted a photo on your wall.',
+    'Mia Redwood commented on your last post.',
+    'Lucas McAlister just send you a message.',
+  ];
   constructor() {}
 
   ngOnInit(): void {}

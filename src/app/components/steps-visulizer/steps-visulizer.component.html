@@ -1,10 +1,16 @@
 <div class="container">
   <div class="heading headingVerticleSpace">{{ heading }}</div>
-  <div class="timeLine">
-    <div class="line">transaction send</div>
-    <div class="line">transaction send</div>
-    <div class="line">transaction send</div>
-    <div class="line">transaction send</div>
-    <div class="line">transaction send</div>
+  <div class="container">
+    <div class="rightbox">
+      <div class="rb-container">
+        <ul class="rb">
+          <li class="rb-item" *ngFor="let timeLine of timeLines">
+            <div class="item-title">
+              {{ timeLine }}
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
