@@ -1,0 +1,20 @@
+@import '../../../../color.scss';
+div.step{    
+    div.line{
+        border-left: 2px dashed $virtualLine-color;
+        height: 0px;
+        width: 0px;
+        margin-left: 9px;
+      }
+    div.circleText{
+        display: flex;
+        column-gap: 5px;
+        div.circle{
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: $cube-color;
+            clip-path: circle(0%);
+        }
+    }
+}

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { gsap } from 'gsap';
 import { MotionPathPlugin } from 'gsap/src/all';
-import { skip, skipUntil, Subject, take } from 'rxjs';
+import { skip, Subject } from 'rxjs';
+import { logger } from '../../utils/helper';
 @Component({
   selector: 'sb-validator-visualizer',
   templateUrl: './validator-visualizer.component.html',
@@ -66,13 +67,14 @@ export class ValidatorVisualizerComponent implements OnInit {
   ];
   //observables
   $broadCastCompleted = new Subject();
+  logger: logger = new logger('[sb-validator-visualizer]');
   constructor() {
     gsap.registerPlugin(MotionPathPlugin);
   }
 
   ngOnInit(): void {
     this.$broadCastCompleted.pipe(skip(4)).subscribe(() => {
-      console.log('done');
+      this.logger.log('broadcasting completed');
     });
   }
   sendTransaction(): void {

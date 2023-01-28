@@ -1,0 +1,14 @@
+<div class="step">
+  <div class="line" #line></div>
+  <div class="circleText">
+    <div class="circle" #circle></div>
+    <div
+      class="text"
+      sbtypingAnimation
+      [typeSpeed]="50"
+      [condition]="startTyping"
+      (complete)="onTypingAnimationComplete()"
+      [text]="stepText"
+    ></div>
+  </div>
+</div>

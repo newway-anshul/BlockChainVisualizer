@@ -1,5 +1,23 @@
 <div class="container">
   <div class="heading headingVerticleSpace">{{ heading }}</div>
+  <div class="timeLineContianer">
+    <div class="leftSide">
+      <sb-step
+        [attr.id]="i"
+        [attr.sa]="!!start[i]"
+        *ngFor="let timeLine of timeLines; let i = index"
+        [showLine]="!!start[i] && i != 0"
+        [startAnimation]="!!start[i]"
+        (animationCompleted)="animationCompleted()"
+        [stepText]="timeLine"
+      ></sb-step>
+    </div>
+  </div>
+</div>
+<div (click)="addNewCircle()">Add Circle</div>
+
+<!--
+  old one
   <div class="container">
     <div class="rightbox">
       <div class="rb-container">
@@ -13,4 +31,4 @@
       </div>
     </div>
   </div>
-</div>
+-->
