@@ -6,7 +6,7 @@
         [attr.id]="i"
         [attr.sa]="!!start[i]"
         *ngFor="let timeLine of timeLines; let i = index"
-        [showLine]="!!start[i] && i != 0"
+        [showLine]="!!start[i + 1] && i != timeLines.length - 1"
         [startAnimation]="!!start[i]"
         (animationCompleted)="animationCompleted()"
         [stepText]="timeLine"

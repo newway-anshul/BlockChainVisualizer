@@ -49,7 +49,12 @@
           <input type="text" formControlName="gasFee" />
         </div>
       </div>
-      <div class="submitBtn" (click)="sendTx()">Submit</div>
+      <div class="submitBtn" (click)="sendTx()">
+        <span *ngIf="txState == 'w'">Submit</span>
+        <div class="loader-img" *ngIf="txState != 'w'">
+          <img src="../../../assets/loader.svg" alt="" />
+        </div>
+      </div>
     </form>
   </div>
 </div>

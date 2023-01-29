@@ -84,7 +84,7 @@ export class ValidatorVisualizerComponent implements OnInit {
       motionPath: '#wire',
       ease: 'none.none',
       onComplete: () => {
-        this.broadCast();
+        //this.broadCast();
       },
     });
   }

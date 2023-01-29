@@ -16,16 +16,23 @@ import { logger } from 'src/app/utils/helper';
   styleUrls: ['./step.component.scss'],
 })
 export class StepComponent implements OnInit {
+  @Input('index') index: number;
   @Input('stepText') stepText: string = '';
-  @Input('showLine') showLine: boolean = false;
-  @Input() set startAnimation(value: boolean) {
+  @Input('showLine') set showLine(value: boolean) {
+    if (value) {
+      this.gsapTimeLine.to(this.step.nativeElement.querySelector('div.line'), {
+        duration: 0.5,
+        height: '100px',
+      });
+    }
+  }
+  @Input('startAnimation') set startAnimation(value: boolean) {
     if (value) {
       this.start();
     }
   }
   @Output('animationCompleted') animationCompleted = new EventEmitter<void>();
-  @ViewChild('line') line: ElementRef;
-  @ViewChild('circle') circle: ElementRef;
+  @ViewChild('step') step: ElementRef;
   startTyping: boolean = false;
   gsapTimeLine: GSAPTimeline;
   logger: logger = new logger('[sb-step]');
@@ -35,13 +42,12 @@ export class StepComponent implements OnInit {
     this.gsapTimeLine = gsap.timeline();
   }
   start() {
-    if (this.showLine) {
-      this.gsapTimeLine.to(this.line.nativeElement, {
-        duration: 0.5,
-        height: '100px',
-      });
-    }
-    this.gsapTimeLine.to(this.circle.nativeElement, {
+    this.gsapTimeLine.to(this.step.nativeElement, {
+      display: 'flex',
+      duration: 0,
+    });
+    this.gsapTimeLine.to(this.step.nativeElement.querySelector('div.circle'), {
+      display: 'block',
       clipPath: 'circle(40%)',
       duration: 0.5,
       ease: Power1.easeOut,

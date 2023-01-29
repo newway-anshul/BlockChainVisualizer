@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TransactionService } from '../../services/transactionService/transaction.service';
 import { logger } from '../../utils/helper';
 @Component({
   selector: 'sb-steps-visulizer',
@@ -8,24 +9,24 @@ import { logger } from '../../utils/helper';
 export class StepsVisulizerComponent implements OnInit {
   heading: string = 'Steps Visualizer';
   timeLines = [
-    'Chris Serrano posted a photo on your wall.',
-    'Mia Redwood commented on your last post.',
-    'Lucas McAlister just send you a message.',
+    'Transaction sent to one of the node',
+    'Transaction broadcasted to all the nodes',
+    'Validating trasaction',
   ];
   start: Array<boolean> = [];
+  animationState: Array<boolean> = [];
   circleArry = [1];
-  showLine = false;
-  showCircle = false;
   timeLine: GSAPTimeline;
   logger: logger = new logger('[sb-steps-visulizer]');
-  constructor() {}
+  constructor(private txService: TransactionService) {
+    this.txService.$startTx.subscribe((value) => {
+      this.start.push(value);
+    });
+  }
 
   ngOnInit(): void {}
-  addNewCircle(): void {
-    this.start.push(true);
-    console.log(this.start);
-  }
+  addNewCircle(): void {}
   animationCompleted() {
-    this.logger.log('step animation completed');
+    this.start.push(true);
   }
 }

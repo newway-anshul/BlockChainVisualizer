@@ -13,7 +13,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { AnimateLineDirective } from './directives/animateLine/animate-line.directive';
 import { TypingAnimationDirective } from './directives/autoTyping/auto-typing.directive';
 import { StepComponent } from './components/steps-visulizer/step/step.component';
-
+import { TransactionService } from './services/transactionService/transaction.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +29,7 @@ import { StepComponent } from './components/steps-visulizer/step/step.component'
     StepComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
-  providers: [],
+  providers: [TransactionService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
