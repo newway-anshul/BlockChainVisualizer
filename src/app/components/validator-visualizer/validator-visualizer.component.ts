@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { gsap } from 'gsap';
 import { MotionPathPlugin } from 'gsap/src/all';
 import { skip, Subject } from 'rxjs';
+import { TransactionService } from 'src/app/services/transactionService/transaction.service';
 import { logger } from '../../utils/helper';
 @Component({
   selector: 'sb-validator-visualizer',
@@ -68,13 +69,25 @@ export class ValidatorVisualizerComponent implements OnInit {
   //observables
   $broadCastCompleted = new Subject();
   logger: logger = new logger('[sb-validator-visualizer]');
-  constructor() {
+  constructor(private txSerivce: TransactionService) {
     gsap.registerPlugin(MotionPathPlugin);
   }
 
   ngOnInit(): void {
     this.$broadCastCompleted.pipe(skip(4)).subscribe(() => {
       this.logger.log('broadcasting completed');
+    });
+    this.txSerivce.$runValidatorAnimation.subscribe((data) => {
+      switch (true) {
+        case data.id == 0:
+          this.sendTransaction();
+          break;
+        case data.id == 1:
+          this.broadCast();
+          break;
+        default:
+          this.logger.log(`id ${data.id} is not matching with any animation`);
+      }
     });
   }
   sendTransaction(): void {

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { TransactionService } from '../../services/transactionService/transaction.service';
+import {
+  TransactionService,
+  animationType,
+} from '../../services/transactionService/transaction.service';
 import { logger } from '../../utils/helper';
 @Component({
   selector: 'sb-steps-visulizer',
@@ -15,7 +18,6 @@ export class StepsVisulizerComponent implements OnInit {
   ];
   start: Array<boolean> = [];
   animationState: Array<boolean> = [];
-  circleArry = [1];
   timeLine: GSAPTimeline;
   logger: logger = new logger('[sb-steps-visulizer]');
   constructor(private txService: TransactionService) {
@@ -28,5 +30,13 @@ export class StepsVisulizerComponent implements OnInit {
   addNewCircle(): void {}
   animationCompleted() {
     this.start.push(true);
+  }
+  startValidatorAnimation(id: number) {
+    this.txService.setAnimation(id, {
+      CIRCLEANIMATION: true,
+      TEXTANIMATION: false,
+      LINEANIMATION: false,
+    });
+    this.txService.runValidatorAnimation(id, 0);
   }
 }
