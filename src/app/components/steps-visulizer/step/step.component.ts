@@ -9,6 +9,7 @@ import {
   ElementRef,
 } from '@angular/core';
 import { gsap, Power1 } from 'gsap';
+import { TransactionService } from 'src/app/services/transactionService/transaction.service';
 import { logger } from 'src/app/utils/helper';
 @Component({
   selector: 'sb-step',
@@ -30,7 +31,10 @@ export class StepComponent implements OnInit {
   startTyping: boolean = false;
   gsapTimeLine: GSAPTimeline;
   logger: logger = new logger('[sb-step]');
-  constructor(private _ngZone: NgZone) {}
+  constructor(
+    private _ngZone: NgZone,
+    private _txService: TransactionService
+  ) {}
 
   ngOnInit(): void {
     this.gsapTimeLine = gsap.timeline();
@@ -48,7 +52,7 @@ export class StepComponent implements OnInit {
       onComplete: () => {
         this._ngZone.run(() => {
           this.startTyping = true;
-          this.typingStarted.emit();
+          this._txService.runValidatorAnimation(this.msgIndex, 0);
         });
       },
     });
@@ -56,7 +60,7 @@ export class StepComponent implements OnInit {
   onTypingAnimationComplete() {
     this.logger.log('Typing animation completed');
     if (!this.showLine) {
-      this.animationCompleted.emit();
+      this._txService.textAnimationCompleted(this.msgIndex);
       return;
     }
     this.gsapTimeLine.to(this.step.nativeElement.querySelector('div.line'), {
@@ -64,8 +68,8 @@ export class StepComponent implements OnInit {
       height: '100px',
       onComplete: () => {
         this._ngZone.run(() => {
-          this.logger.log('first animaion completed');
-          this.animationCompleted.emit();
+          this.logger.log(`animation for id ${this.msgIndex} completed`);
+          this._txService.textAnimationCompleted(this.msgIndex);
         });
       },
     });

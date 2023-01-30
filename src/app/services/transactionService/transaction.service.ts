@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-enum txState {
+import { logger } from '../../utils/helper';
+export enum txState {
   WAITING = 'w',
   SENT = 's',
   IN_PROGRESS = 'ip',
@@ -30,8 +31,10 @@ export class TransactionService {
     txState.WAITING
   );
   $runValidatorAnimation: Subject<ValidatorAnimation> = new Subject();
-  $animationStatus: Subject<AnimationState[]> = new Subject();
+  $animationCompleted: Subject<boolean> = new Subject();
+  currentAnimationID: number;
   private animationState: Map<number, AnimationState> = new Map();
+  logger: logger = new logger('[TransactionService]');
   constructor() {}
   startTx(): void {
     this.$startTx.next(true);
@@ -42,25 +45,78 @@ export class TransactionService {
     this.$txState.next(txState.COMPLETED);
     this.$txState.next(txState.WAITING);
   }
-  setAnimation(id: number, animationName: AnimationState) {
-    if (this.animationState.has(id)) {
+  setAnimationState(id: number) {
+    if (!this.animationState.has(id)) {
+      this.animationState.set(id, {
+        LINEANIMATION: false,
+        CIRCLEANIMATION: false,
+        VALIDATORANIMATION: false,
+        TEXTANIMATION: false,
+      });
+    } else {
+      alert(`animaiton for id ${id} is already available`);
+      return;
+    }
+    this.currentAnimationID = id;
+    this.logger.log([...this.animationState.entries()]);
+  }
+  textAnimationCompleted(id: number) {
+    if (!this.animationState.has(id)) {
+      this.animationState.set(id, {
+        LINEANIMATION: true,
+        CIRCLEANIMATION: true,
+        TEXTANIMATION: true,
+      });
+    } else {
       this.animationState.set(
         id,
         Object.assign(this.animationState.get(id) as AnimationState, {
-          animationName,
+          LINEANIMATION: true,
+          CIRCLEANIMATION: true,
+          TEXTANIMATION: true,
         })
       );
-    } else {
-      this.animationState.set(id, animationName);
     }
+    this.checkAnimationStatusnEmit(id);
+  }
+  valiDatorAnimationCompleted(id: number) {
+    if (!this.animationState.has(id)) {
+      this.animationState.set(id, {
+        VALIDATORANIMATION: true,
+      });
+    } else {
+      this.animationState.set(
+        id,
+        Object.assign(this.animationState.get(id) as AnimationState, {
+          VALIDATORANIMATION: true,
+        })
+      );
+    }
+    this.checkAnimationStatusnEmit(id);
   }
   runValidatorAnimation(id: number, delay: number = 0) {
-    this.setAnimation(id, {
-      VALIDATORANIMATION: false,
-    });
     this.$runValidatorAnimation.next({
       id: id,
       delay: delay,
     });
+  }
+  checkAnimationStatusnEmit(id: number) {
+    let state: AnimationState | undefined = this.animationState.get(id);
+    if (state == undefined) {
+      alert(`no animation for id ${id} is available`);
+      return;
+    }
+    if (
+      state.CIRCLEANIMATION &&
+      state.LINEANIMATION &&
+      state.TEXTANIMATION &&
+      state.VALIDATORANIMATION
+    ) {
+      this.logger.log(`animation for id ${id} completed`);
+      this.$animationCompleted.next(true);
+    }
+  }
+  completeTxCompleted() {
+    this.$isTxCompleted.next(true);
   }
 }

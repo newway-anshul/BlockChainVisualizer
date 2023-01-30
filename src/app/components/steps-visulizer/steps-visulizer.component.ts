@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  TransactionService,
-  animationType,
-} from '../../services/transactionService/transaction.service';
+import { take, timer } from 'rxjs';
+import { TransactionService } from '../../services/transactionService/transaction.service';
 import { logger } from '../../utils/helper';
 @Component({
   selector: 'sb-steps-visulizer',
@@ -23,20 +21,22 @@ export class StepsVisulizerComponent implements OnInit {
   constructor(private txService: TransactionService) {
     this.txService.$startTx.subscribe((value) => {
       this.start.push(value);
+      this.txService.setAnimationState(this.start.length - 1);
     });
   }
 
-  ngOnInit(): void {}
-  addNewCircle(): void {}
-  animationCompleted() {
-    this.start.push(true);
-  }
-  startValidatorAnimation(id: number) {
-    this.txService.setAnimation(id, {
-      CIRCLEANIMATION: true,
-      TEXTANIMATION: false,
-      LINEANIMATION: false,
+  ngOnInit(): void {
+    this.txService.$animationCompleted.subscribe((value) => {
+      if (this.start.length == this.timeLines.length) {
+        this.logger.log('all msgs are shown');
+        this.txService.completeTxCompleted();
+      }
+      timer(1000)
+        .pipe(take(1))
+        .subscribe(() => {
+          this.start.push(true);
+          this.txService.setAnimationState(this.start.length - 1);
+        });
     });
-    this.txService.runValidatorAnimation(id, 0);
   }
 }

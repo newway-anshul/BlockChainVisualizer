@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { interval, take } from 'rxjs';
-import { TransactionService } from '../../services/transactionService/transaction.service';
+import {
+  TransactionService,
+  txState,
+} from '../../services/transactionService/transaction.service';
 @Component({
   selector: 'sb-send-trasaction',
   templateUrl: './send-trasaction.component.html',
@@ -21,7 +23,9 @@ export class SendTrasactionComponent implements OnInit {
   });
   txState: string;
   constructor(private transactionService: TransactionService) {
-    this.transactionService.$isTxCompleted.subscribe((value) => {});
+    this.transactionService.$isTxCompleted.subscribe((value) => {
+      this.txState = txState.WAITING;
+    });
     this.transactionService.$txState.subscribe((state) => {
       this.txState = state;
     });

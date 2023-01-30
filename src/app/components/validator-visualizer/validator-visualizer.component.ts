@@ -74,31 +74,36 @@ export class ValidatorVisualizerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.$broadCastCompleted.pipe(skip(4)).subscribe(() => {
-      this.logger.log('broadcasting completed');
-    });
     this.txSerivce.$runValidatorAnimation.subscribe((data) => {
       switch (true) {
         case data.id == 0:
-          this.sendTransaction();
+          this.sendTransaction().then(() => {
+            this.txSerivce.valiDatorAnimationCompleted(data.id);
+          });
           break;
         case data.id == 1:
+          this.$broadCastCompleted.pipe(skip(4)).subscribe(() => {
+            this.txSerivce.valiDatorAnimationCompleted(data.id);
+          });
           this.broadCast();
           break;
         default:
           this.logger.log(`id ${data.id} is not matching with any animation`);
+          this.txSerivce.valiDatorAnimationCompleted(data.id);
       }
     });
   }
-  sendTransaction(): void {
+  sendTransaction(): Promise<void> {
     this.showTransaction = true;
-    gsap.to('#tNode', {
-      duration: this.sendTransactionDuration,
-      motionPath: '#wire',
-      ease: 'none.none',
-      onComplete: () => {
-        //this.broadCast();
-      },
+    return new Promise((resolve, reject) => {
+      gsap.to('#tNode', {
+        duration: this.sendTransactionDuration,
+        motionPath: '#wire',
+        ease: 'none.none',
+        onComplete: () => {
+          resolve();
+        },
+      });
     });
   }
   broadCast() {

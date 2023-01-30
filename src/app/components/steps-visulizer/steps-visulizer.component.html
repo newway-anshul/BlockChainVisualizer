@@ -7,8 +7,6 @@
         [msgIndex]="i"
         [showLine]="i != timeLines.length - 1"
         [startAnimation]="!!start[i]"
-        (animationCompleted)="animationCompleted()"
-        (typingStarted)="startValidatorAnimation(i)"
         [stepText]="timeLine"
       ></sb-step>
     </div>
