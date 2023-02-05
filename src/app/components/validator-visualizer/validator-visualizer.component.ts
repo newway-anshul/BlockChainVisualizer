@@ -77,7 +77,14 @@ export class ValidatorVisualizerComponent implements OnInit {
           });
           break;
         case data.id == 4:
-          this.executeTx();
+          this.executeTx().then(() => {
+            this.txSerivce.valiDatorAnimationCompleted(data.id);
+          });
+          break;
+        case data.id == 5:
+          this.broadCastExecutedTx().then(() => {
+            this.txSerivce.valiDatorAnimationCompleted(data.id);
+          });
           break;
         default:
           this.logger.log(`id ${data.id} is not matching with any animation`);
@@ -220,43 +227,60 @@ export class ValidatorVisualizerComponent implements OnInit {
       timeLine.play();
     });
   }
-  executeTx() {
+  executeTx(): Promise<void> {
     let node = this._elRef.nativeElement.querySelector('circle.selectedNode');
-    gsap.to(node, {
-      r: 40,
-      yoyo: true,
-      duration: 0.5,
-      repeat: 8,
-      onComplete: () => {
-        gsap.set(node, {
-          r: 30,
-        });
-      },
+    return new Promise((resolve, reject) => {
+      gsap.to(node, {
+        r: 40,
+        yoyo: true,
+        duration: 0.5,
+        repeat: 8,
+        onComplete: () => {
+          gsap.set(node, {
+            r: 30,
+            onComplete: () => {
+              resolve();
+            },
+          });
+        },
+      });
     });
   }
-  broadCastExecutedTx() {
+  broadCastExecutedTx(): Promise<void> {
     this.showBroadCastTxgrp = true;
     let allTxNodes = this._elRef.nativeElement.querySelectorAll(
       'g.broadCastTxGrp circle'
     );
-    allTxNodes.forEach((node: HTMLElement, index: number) => {
-      let pathString =
-        this.nodes[this.selectedValidator].originatingLines?.paths[index].path;
-      let direction =
-        this.nodes[this.selectedValidator].originatingLines?.paths[index]
-          .direction;
-      let delay =
-        !!this.nodes[this.selectedValidator].originatingLines?.paths[index]
-          .delay;
-      gsap.to(node, {
-        motionPath: () => {
-          if (direction == 'R') {
-            return this.correctPath(pathString as string);
-          }
-          return pathString as string;
+    return new Promise((resolve, reject) => {
+      let tl = gsap.timeline({
+        onComplete: () => {
+          resolve();
         },
-        delay: delay ? 1 : 0,
-        duration: 1,
+      });
+      allTxNodes.forEach((node: HTMLElement, index: number) => {
+        let pathString =
+          this.nodes[this.selectedValidator].originatingLines?.paths[index]
+            .path;
+        let direction =
+          this.nodes[this.selectedValidator].originatingLines?.paths[index]
+            .direction;
+        let delay =
+          !!this.nodes[this.selectedValidator].originatingLines?.paths[index]
+            .delay;
+        tl.to(
+          node,
+          {
+            motionPath: () => {
+              if (direction == 'R') {
+                return this.correctPath(pathString as string);
+              }
+              return pathString as string;
+            },
+            delay: delay ? 1 : 0,
+            duration: 1,
+          },
+          'start'
+        );
       });
     });
   }

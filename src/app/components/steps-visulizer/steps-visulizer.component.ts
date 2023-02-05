@@ -15,6 +15,8 @@ export class StepsVisulizerComponent implements OnInit {
     'Validating trasaction',
     'Selecting random validator',
     'Executing Transaction',
+    'Broad casting transaction',
+    'Validating Trasaction',
   ];
   start: Array<boolean> = [];
   logger: logger = new logger('[sb-steps-visulizer]');
