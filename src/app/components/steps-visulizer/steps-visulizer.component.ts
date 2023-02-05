@@ -13,10 +13,10 @@ export class StepsVisulizerComponent implements OnInit {
     'Transaction sent to one of the node',
     'Transaction broadcasted to all the nodes',
     'Validating trasaction',
+    'Selecting random validator',
+    'Executing Transaction',
   ];
   start: Array<boolean> = [];
-  animationState: Array<boolean> = [];
-  timeLine: GSAPTimeline;
   logger: logger = new logger('[sb-steps-visulizer]');
   constructor(private txService: TransactionService) {
     this.txService.$startTx.subscribe((value) => {

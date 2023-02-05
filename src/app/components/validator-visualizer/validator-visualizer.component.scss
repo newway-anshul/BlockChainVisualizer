@@ -28,7 +28,7 @@ div.container{
             div.circleIcon{
                 background: red;
                 height: 25px;
-                width: 25px;
+                min-width: 25px;
                 border-radius: 50%;
             }
         }

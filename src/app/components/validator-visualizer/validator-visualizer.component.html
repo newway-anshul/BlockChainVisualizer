@@ -3151,14 +3151,14 @@
           [attr.stroke]="l2N"
         />
         <circle
-          *ngFor="let node of nodes"
-          [attr.cx]="node.cx"
-          [attr.cy]="node.cy"
+          *ngFor="let node of nodes | keyvalue"
+          [attr.cx]="node.value.cx"
+          [attr.cy]="node.value.cy"
           [attr.r]="nodeRadius"
           [attr.stroke]="nodeOuterStrokeColor"
           stroke-width="1"
           [attr.fill]="nodeColor"
-          [attr.id]="'node' + node.id"
+          [attr.id]="'node' + node.key"
           class="node"
         />
         <circle
@@ -3179,7 +3179,21 @@
             stroke-width="3"
             fill="pink"
             class="node bnode"
+            [attr.nId]="i"
             [attr.id]="'bNode' + i"
+          />
+        </g>
+        <g class="broadCastTxGrp">
+          <circle
+            [ngClass]="{ show: showBroadCastTxgrp, hide: !showBroadCastTxgrp }"
+            *ngFor="
+              let node of nodes[selectedValidator]!.originatingLines!.paths;
+              let i = index
+            "
+            [attr.r]="trasactionCircleRadius"
+            stroke="black"
+            stroke-width="3"
+            fill="red"
           />
         </g>
       </g>
@@ -3228,5 +3242,11 @@
       Send Transaction
     </div>
     <div class="broadCastTransaction" (click)="broadCast()">broad cast</div>
+    <div class="broadCastTransaction" (click)="selectRandomValidator()">
+      Select ranom
+    </div>
+    <div class="broadCastTransaction" (click)="broadCastExecutedTx()">
+      execute tx
+    </div>
   </div>
 </div>
